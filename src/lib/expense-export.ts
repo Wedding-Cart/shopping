@@ -129,14 +129,7 @@ export function exportExpensesPdf(expenses: WeddingExpenseDoc[]) {
 }
 
 export function exportExpensesExcel(expenses: WeddingExpenseDoc[]) {
-  const header = [
-    "শিরোনাম",
-    "ক্যাটাগরি",
-    "পরিমাণ",
-    "তারিখ",
-    "নোট",
-    "যোগকারী",
-  ];
+  const header = ["শিরোনাম", "ক্যাটাগরি", "পরিমাণ", "তারিখ", "নোট", "যোগকারী"];
   const rows = expenses.map((e) => [
     e.title,
     e.categoryName,
@@ -155,9 +148,7 @@ export function exportExpensesExcel(expenses: WeddingExpenseDoc[]) {
   const tableHtml = `
     <table>
       <thead><tr>${header.map((h) => `<th>${h}</th>`).join("")}</tr></thead>
-      <tbody>${rows
-        .map((r) => `<tr>${r.map((c) => escCell(c)).join("")}</tr>`)
-        .join("")}</tbody>
+      <tbody>${rows.map((r) => `<tr>${r.map((c) => escCell(c)).join("")}</tr>`).join("")}</tbody>
     </table>`;
 
   const xls = `<html xmlns:o="urn:schemas-microsoft-com:office:office"

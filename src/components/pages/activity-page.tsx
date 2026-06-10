@@ -22,12 +22,8 @@ export function ActivityPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-3xl font-semibold tracking-tight">
-          কার্যকলাপ লগ
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          সর্বশেষ {logs.length} কার্যকলাপ
-        </p>
+        <h1 className="text-3xl font-semibold tracking-tight">কার্যকলাপ লগ</h1>
+        <p className="text-sm text-muted-foreground">সর্বশেষ {logs.length} কার্যকলাপ</p>
       </div>
 
       {logs.length === 0 ? (
@@ -39,10 +35,7 @@ export function ActivityPage() {
       ) : (
         <div className="glass divide-y divide-border/60 rounded-2xl shadow-soft">
           {logs.map((log) => (
-            <div
-              key={log.id}
-              className="flex items-start gap-3 p-4"
-            >
+            <div key={log.id} className="flex items-start gap-3 p-4">
               <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full gradient-emerald text-xs font-semibold text-primary-foreground">
                 {(log.userName || "?").slice(0, 1).toUpperCase()}
               </div>
@@ -54,9 +47,7 @@ export function ActivityPage() {
                   </Badge>
                 </div>
                 {log.detail && (
-                  <p className="bn mt-0.5 truncate text-sm text-muted-foreground">
-                    {log.detail}
-                  </p>
+                  <p className="bn mt-0.5 truncate text-sm text-muted-foreground">{log.detail}</p>
                 )}
                 <p className="mt-1 text-xs text-muted-foreground">
                   {formatDateTime(log.createdAt)}

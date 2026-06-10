@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  useMembers,
-  useItems,
-  addMember,
-  updateMember,
-  deleteMember,
-} from "@/lib/firestore";
+import { useMembers, useItems, addMember, updateMember, deleteMember } from "@/lib/firestore";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,12 +73,8 @@ export function MembersPage() {
     <div className="space-y-5">
       <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">
-            পরিবারের সদস্য
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {members.length} জন সদস্য
-          </p>
+          <h1 className="text-3xl font-semibold tracking-tight">পরিবারের সদস্য</h1>
+          <p className="text-sm text-muted-foreground">{members.length} জন সদস্য</p>
         </div>
         <Button onClick={openAdd}>
           <Plus className="mr-2 h-4 w-4" />
@@ -113,9 +103,7 @@ export function MembersPage() {
                   </div>
                   <div>
                     <p className="bn font-semibold">{m.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {count} আইটেম
-                    </p>
+                    <p className="text-xs text-muted-foreground">{count} আইটেম</p>
                   </div>
                 </div>
                 <div className="flex gap-1">

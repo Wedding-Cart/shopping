@@ -62,10 +62,7 @@ import { usePin } from "@/lib/pin-context";
 import { EmptyState } from "@/components/empty-state";
 import { StatCard } from "@/components/stat-card";
 import { formatCurrency, formatNumber } from "@/lib/format";
-import {
-  exportExpensesPdf,
-  exportExpensesExcel,
-} from "@/lib/expense-export";
+import { exportExpensesPdf, exportExpensesExcel } from "@/lib/expense-export";
 import type { WeddingExpenseDoc } from "@/lib/types";
 
 function todayIso() {
@@ -98,8 +95,7 @@ export function WeddingExpensesPage() {
   const [catMgrOpen, setCatMgrOpen] = useState(false);
   const [newCatName, setNewCatName] = useState("");
 
-  const [confirmDelete, setConfirmDelete] =
-    useState<WeddingExpenseDoc | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<WeddingExpenseDoc | null>(null);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -301,29 +297,13 @@ export function WeddingExpensesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <StatCard
-          icon={Wallet}
-          label="মোট খরচ"
-          value={formatCurrency(totals.total)}
-        />
-        <StatCard
-          icon={Tag}
-          label="ক্যাটাগরি"
-          value={formatNumber(categories.length)}
-        />
-        <StatCard
-          icon={ReceiptText}
-          label="মোট এন্ট্রি"
-          value={formatNumber(expenses.length)}
-        />
+        <StatCard icon={Wallet} label="মোট খরচ" value={formatCurrency(totals.total)} />
+        <StatCard icon={Tag} label="ক্যাটাগরি" value={formatNumber(categories.length)} />
+        <StatCard icon={ReceiptText} label="মোট এন্ট্রি" value={formatNumber(expenses.length)} />
         <StatCard
           icon={CalendarDays}
           label="সর্বশেষ খরচ"
-          value={
-            totals.latest
-              ? formatCurrency(totals.latest.amount)
-              : "—"
-          }
+          value={totals.latest ? formatCurrency(totals.latest.amount) : "—"}
           hint={totals.latest?.title}
         />
       </div>
@@ -370,9 +350,7 @@ export function WeddingExpensesPage() {
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
             <span>
               ফিল্টার করা: {formatNumber(filtered.length)} এন্ট্রি ·{" "}
-              <b className="text-foreground">
-                {formatCurrency(totals.filteredTotal)}
-              </b>
+              <b className="text-foreground">{formatCurrency(totals.filteredTotal)}</b>
             </span>
             <Button
               variant="ghost"
@@ -404,13 +382,9 @@ export function WeddingExpensesPage() {
               >
                 <div>
                   <p className="bn text-sm font-medium">{c.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {formatNumber(c.count)} এন্ট্রি
-                  </p>
+                  <p className="text-xs text-muted-foreground">{formatNumber(c.count)} এন্ট্রি</p>
                 </div>
-                <span className="font-semibold">
-                  {formatCurrency(c.total)}
-                </span>
+                <span className="font-semibold">{formatCurrency(c.total)}</span>
               </div>
             ))}
           </div>
@@ -440,33 +414,22 @@ export function WeddingExpensesPage() {
                   <th className="px-3 py-2 text-left font-medium">তারিখ</th>
                   <th className="px-3 py-2 text-left font-medium">নোট</th>
                   <th className="px-3 py-2 text-left font-medium">যোগকারী</th>
-                  {isAdmin && (
-                    <th className="px-3 py-2 text-right font-medium">ক্রিয়া</th>
-                  )}
+                  {isAdmin && <th className="px-3 py-2 text-right font-medium">ক্রিয়া</th>}
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((e) => (
-                  <tr
-                    key={e.id}
-                    className="border-t border-border/50 hover:bg-muted/20"
-                  >
+                  <tr key={e.id} className="border-t border-border/50 hover:bg-muted/20">
                     <td className="bn px-3 py-2 font-medium">{e.title}</td>
-                    <td className="bn px-3 py-2 text-muted-foreground">
-                      {e.categoryName}
-                    </td>
+                    <td className="bn px-3 py-2 text-muted-foreground">{e.categoryName}</td>
                     <td className="px-3 py-2 text-right font-semibold">
                       {formatCurrency(e.amount)}
                     </td>
-                    <td className="px-3 py-2 text-muted-foreground">
-                      {e.expenseDate}
-                    </td>
+                    <td className="px-3 py-2 text-muted-foreground">{e.expenseDate}</td>
                     <td className="bn max-w-[220px] truncate px-3 py-2 text-muted-foreground">
                       {e.notes || "—"}
                     </td>
-                    <td className="bn px-3 py-2 text-muted-foreground">
-                      {e.createdBy}
-                    </td>
+                    <td className="bn px-3 py-2 text-muted-foreground">{e.createdBy}</td>
                     {isAdmin && (
                       <td className="px-3 py-2 text-right">
                         <div className="inline-flex gap-1">
@@ -588,9 +551,7 @@ export function WeddingExpensesPage() {
             </div>
             <div className="max-h-72 space-y-1.5 overflow-y-auto">
               {categories.length === 0 ? (
-                <p className="text-center text-sm text-muted-foreground">
-                  কোনো ক্যাটাগরি নেই
-                </p>
+                <p className="text-center text-sm text-muted-foreground">কোনো ক্যাটাগরি নেই</p>
               ) : (
                 categories.map((c) => (
                   <div
@@ -617,10 +578,7 @@ export function WeddingExpensesPage() {
         </DialogContent>
       </Dialog>
 
-      <AlertDialog
-        open={!!confirmDelete}
-        onOpenChange={(o) => !o && setConfirmDelete(null)}
-      >
+      <AlertDialog open={!!confirmDelete} onOpenChange={(o) => !o && setConfirmDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>খরচ মুছবেন?</AlertDialogTitle>

@@ -1,8 +1,4 @@
-import {
-  useRecycle,
-  restoreItem,
-  permanentlyDeleteItem,
-} from "@/lib/firestore";
+import { useRecycle, restoreItem, permanentlyDeleteItem } from "@/lib/firestore";
 import { Button } from "@/components/ui/button";
 import { Trash2, RotateCcw } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
@@ -51,9 +47,7 @@ export function RecyclePage() {
     <div className="space-y-5">
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">রিসাইকেল বিন</h1>
-        <p className="text-sm text-muted-foreground">
-          {items.length} মুছে ফেলা আইটেম
-        </p>
+        <p className="text-sm text-muted-foreground">{items.length} মুছে ফেলা আইটেম</p>
       </div>
 
       {items.length === 0 ? (
@@ -65,10 +59,7 @@ export function RecyclePage() {
       ) : (
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
-            <div
-              key={item.id}
-              className="glass rounded-2xl p-4 shadow-soft"
-            >
+            <div key={item.id} className="glass rounded-2xl p-4 shadow-soft">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <h3 className="bn truncate font-semibold">{item.name}</h3>
@@ -81,11 +72,8 @@ export function RecyclePage() {
                 </span>
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
-                মুছেছেন{" "}
-                <span className="font-medium text-foreground">
-                  {item.deletedBy}
-                </span>{" "}
-                · {formatDateTime(item.deletedAt)}
+                মুছেছেন <span className="font-medium text-foreground">{item.deletedBy}</span> ·{" "}
+                {formatDateTime(item.deletedAt)}
               </p>
               <div className="mt-3 flex gap-2">
                 <Button

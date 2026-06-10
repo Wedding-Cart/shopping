@@ -48,9 +48,7 @@ export function PinDialog({ open, purpose, onSubmit, onCancel }: Props) {
             <ShieldCheck className="h-6 w-6 text-gold-foreground" />
           </div>
           <DialogTitle className="text-center">পিন লিখুন</DialogTitle>
-          <DialogDescription className="text-center">
-            {purpose}
-          </DialogDescription>
+          <DialogDescription className="text-center">{purpose}</DialogDescription>
         </DialogHeader>
         <div className="flex justify-center py-2">
           <InputOTP
@@ -69,9 +67,7 @@ export function PinDialog({ open, purpose, onSubmit, onCancel }: Props) {
             </InputOTPGroup>
           </InputOTP>
         </div>
-        {error && (
-          <p className="text-center text-sm text-destructive">{error}</p>
-        )}
+        {error && <p className="text-center text-sm text-destructive">{error}</p>}
         <DialogFooter className="gap-2 sm:gap-2">
           <Button variant="outline" onClick={onCancel} className="flex-1">
             বাতিল

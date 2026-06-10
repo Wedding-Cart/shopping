@@ -50,9 +50,7 @@ export function LoginScreen() {
             <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl gradient-gold shadow-soft">
               <Heart className="h-7 w-7 text-gold-foreground" />
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              বিবাহ পরিকল্পনা
-            </h1>
+            <h1 className="text-3xl font-semibold tracking-tight">বিবাহ পরিকল্পনা</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               উৎসব পরিকল্পনা চালিয়ে যেতে সাইন ইন করুন
             </p>
@@ -93,17 +91,8 @@ export function LoginScreen() {
                 autoComplete="current-password"
               />
             </div>
-            <Button
-              type="submit"
-              className="w-full"
-              size="lg"
-              disabled={busy}
-            >
-              {busy ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                "সাইন ইন"
-              )}
+            <Button type="submit" className="w-full" size="lg" disabled={busy}>
+              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "সাইন ইন"}
             </Button>
           </form>
 

@@ -46,13 +46,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   adminEmail: "rahul@work.com",
 };
 
-export const DEFAULT_EVENTS = [
-  "বিয়ে",
-  "বস্ত্রালঙ্কার",
-  "গায়ে হলুদ",
-  "কালার ফেস্টিভাল",
-  "বউভাত",
-];
+export const DEFAULT_EVENTS = ["বিয়ে", "বস্ত্রালঙ্কার", "গায়ে হলুদ", "কালার ফেস্টিভাল", "বউভাত"];
 
 /** Ensure settings + default events exist (idempotent). */
 export async function ensureBootstrap() {
@@ -107,9 +101,7 @@ function useCol<T>(name: string, ...constraints: QueryConstraint[]): T[] {
       ? query(collection(db, name), ...constraints)
       : collection(db, name);
     return onSnapshot(q, (snap) => {
-      setData(
-        snap.docs.map((d) => ({ id: d.id, ...(d.data() as object) }) as T),
-      );
+      setData(snap.docs.map((d) => ({ id: d.id, ...(d.data() as object) }) as T));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
@@ -129,20 +121,12 @@ export function useRecycle() {
   return useCol<RecycleDoc>(COL.recycle, orderBy("deletedAt", "desc"));
 }
 export function useActivity() {
-  return useCol<ActivityLog>(
-    COL.activity,
-    orderBy("createdAt", "desc"),
-    limit(500),
-  );
+  return useCol<ActivityLog>(COL.activity, orderBy("createdAt", "desc"), limit(500));
 }
 
 /* ---------- activity ---------- */
 
-export async function logActivity(
-  userName: string,
-  action: ActivityAction,
-  detail?: string,
-) {
+export async function logActivity(userName: string, action: ActivityAction, detail?: string) {
   const { db } = getFirebase();
   if (!db) return;
   await addDoc(collection(db, COL.activity), {
@@ -170,14 +154,8 @@ export async function updateEvent(id: string, name: string, userName: string) {
   if (!db) return;
   await updateDoc(doc(db, COL.events, id), { name: name.trim() });
   // Also update denormalized eventName on existing items
-  const itemsSnap = await getDocs(
-    query(collection(db, COL.items), where("eventId", "==", id)),
-  );
-  await Promise.all(
-    itemsSnap.docs.map((d) =>
-      updateDoc(d.ref, { eventName: name.trim() }),
-    ),
-  );
+  const itemsSnap = await getDocs(query(collection(db, COL.items), where("eventId", "==", id)));
+  await Promise.all(itemsSnap.docs.map((d) => updateDoc(d.ref, { eventName: name.trim() })));
   await logActivity(userName, "Event Edited", name);
 }
 
@@ -210,12 +188,8 @@ export async function updateMember(id: string, name: string, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   await updateDoc(doc(db, COL.members, id), { name: name.trim() });
-  const itemsSnap = await getDocs(
-    query(collection(db, COL.items), where("memberId", "==", id)),
-  );
-  await Promise.all(
-    itemsSnap.docs.map((d) => updateDoc(d.ref, { memberName: name.trim() })),
-  );
+  const itemsSnap = await getDocs(query(collection(db, COL.items), where("memberId", "==", id)));
+  await Promise.all(itemsSnap.docs.map((d) => updateDoc(d.ref, { memberName: name.trim() })));
   await logActivity(userName, "Member Edited", name);
 }
 
@@ -255,11 +229,7 @@ export async function addItem(input: ItemInput, userName: string) {
   return ref.id;
 }
 
-export async function updateItem(
-  id: string,
-  patch: Partial<ItemDoc>,
-  userName: string,
-) {
+export async function updateItem(id: string, patch: Partial<ItemDoc>, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   await updateDoc(doc(db, COL.items, id), {
@@ -295,10 +265,7 @@ export async function restoreItem(item: RecycleDoc, userName: string) {
   await logActivity(userName, "Item Restored", item.name);
 }
 
-export async function permanentlyDeleteItem(
-  item: RecycleDoc,
-  userName: string,
-) {
+export async function permanentlyDeleteItem(item: RecycleDoc, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   await deleteDoc(doc(db, COL.recycle, item.id));
@@ -308,17 +275,11 @@ export async function permanentlyDeleteItem(
 /* ---------- wedding expenses ---------- */
 
 export function useExpenseCategories() {
-  return useCol<ExpenseCategoryDoc>(
-    COL.expenseCategories,
-    orderBy("createdAt", "asc"),
-  );
+  return useCol<ExpenseCategoryDoc>(COL.expenseCategories, orderBy("createdAt", "asc"));
 }
 
 export function useWeddingExpenses() {
-  return useCol<WeddingExpenseDoc>(
-    COL.weddingExpenses,
-    orderBy("createdAt", "desc"),
-  );
+  return useCol<WeddingExpenseDoc>(COL.weddingExpenses, orderBy("createdAt", "desc"));
 }
 
 export async function addExpenseCategory(name: string, userName: string) {
@@ -331,19 +292,11 @@ export async function addExpenseCategory(name: string, userName: string) {
   await logActivity(userName, "Expense Category Added", name);
 }
 
-export async function deleteExpenseCategory(
-  id: string,
-  name: string,
-  userName: string,
-) {
+export async function deleteExpenseCategory(id: string, name: string, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   const used = await getDocs(
-    query(
-      collection(db, COL.weddingExpenses),
-      where("categoryId", "==", id),
-      limit(1),
-    ),
+    query(collection(db, COL.weddingExpenses), where("categoryId", "==", id), limit(1)),
   );
   if (!used.empty) {
     throw new Error("Cannot delete: expenses exist under this category.");
@@ -357,10 +310,7 @@ export type WeddingExpenseInput = Omit<
   "id" | "createdAt" | "updatedAt" | "createdBy"
 >;
 
-export async function addWeddingExpense(
-  input: WeddingExpenseInput,
-  userName: string,
-) {
+export async function addWeddingExpense(input: WeddingExpenseInput, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   await addDoc(collection(db, COL.weddingExpenses), {
@@ -387,11 +337,7 @@ export async function updateWeddingExpense(
   await logActivity(userName, "Expense Edited", patch.title ?? id);
 }
 
-export async function deleteWeddingExpense(
-  id: string,
-  title: string,
-  userName: string,
-) {
+export async function deleteWeddingExpense(id: string, title: string, userName: string) {
   const { db } = getFirebase();
   if (!db) return;
   await deleteDoc(doc(db, COL.weddingExpenses, id));

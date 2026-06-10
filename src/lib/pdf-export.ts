@@ -16,13 +16,8 @@ function esc(s: string | number | undefined | null): string {
     .replace(/>/g, "&gt;");
 }
 
-export function exportItemsPdf(
-  items: ItemDoc[],
-  filter: PdfFilter,
-  totalBudget: number,
-) {
-  const filtered =
-    filter === "all" ? items : items.filter((i) => i.status === filter);
+export function exportItemsPdf(items: ItemDoc[], filter: PdfFilter, totalBudget: number) {
+  const filtered = filter === "all" ? items : items.filter((i) => i.status === filter);
 
   // Group by event
   const groups = new Map<string, ItemDoc[]>();
@@ -36,10 +31,7 @@ export function exportItemsPdf(
     (s, i) => s + (i.expectedPrice || 0) * (i.quantity || 1),
     0,
   );
-  const totalActual = filtered.reduce(
-    (s, i) => s + (i.actualPrice || 0) * (i.quantity || 1),
-    0,
-  );
+  const totalActual = filtered.reduce((s, i) => s + (i.actualPrice || 0) * (i.quantity || 1), 0);
 
   const now = new Intl.DateTimeFormat("bn-IN", {
     dateStyle: "long",
@@ -52,7 +44,7 @@ export function exportItemsPdf(
         (s, i) =>
           s +
           (i.status === "Purchased"
-            ? (i.actualPrice || i.expectedPrice || 0)
+            ? i.actualPrice || i.expectedPrice || 0
             : i.expectedPrice || 0) *
             (i.quantity || 1),
         0,

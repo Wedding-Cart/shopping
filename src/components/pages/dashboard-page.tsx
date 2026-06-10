@@ -13,12 +13,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { StatCard } from "@/components/stat-card";
-import {
-  useEvents,
-  useItems,
-  useMembers,
-  useSettings,
-} from "@/lib/firestore";
+import { useEvents, useItems, useMembers, useSettings } from "@/lib/firestore";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { useAuth } from "@/lib/auth-context";
 import { Progress } from "@/components/ui/progress";
@@ -34,14 +29,8 @@ export function Dashboard() {
     const total = settings?.totalBudget ?? 0;
     const purchased = items.filter((i) => i.status === "Purchased");
     const pending = items.filter((i) => i.status === "Pending");
-    const spent = purchased.reduce(
-      (s, i) => s + (i.actualPrice || 0) * (i.quantity || 1),
-      0,
-    );
-    const pendingCost = pending.reduce(
-      (s, i) => s + (i.expectedPrice || 0) * (i.quantity || 1),
-      0,
-    );
+    const spent = purchased.reduce((s, i) => s + (i.actualPrice || 0) * (i.quantity || 1), 0);
+    const pendingCost = pending.reduce((s, i) => s + (i.expectedPrice || 0) * (i.quantity || 1), 0);
     const remaining = total - spent;
     return {
       total,
@@ -54,8 +43,7 @@ export function Dashboard() {
     };
   }, [settings, items]);
 
-  const lowBudget =
-    stats.total > 0 && stats.remaining / stats.total < 0.15;
+  const lowBudget = stats.total > 0 && stats.remaining / stats.total < 0.15;
 
   return (
     <div className="space-y-6">
@@ -68,9 +56,7 @@ export function Dashboard() {
           <p className="text-sm text-muted-foreground">
             আবার স্বাগতম{userName ? `, ${userName}` : ""}
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            বিবাহ ড্যাশবোর্ড
-          </h1>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">বিবাহ ড্যাশবোর্ড</h1>
         </div>
         {isAdmin && (
           <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 text-xs font-medium text-gold">
@@ -89,8 +75,7 @@ export function Dashboard() {
           <div>
             <p className="font-medium">বাজেট কমে আসছে</p>
             <p className="text-sm text-muted-foreground">
-              {formatCurrency(stats.total)} এর মধ্যে কেবল{" "}
-              {formatCurrency(stats.remaining)} বাকি।
+              {formatCurrency(stats.total)} এর মধ্যে কেবল {formatCurrency(stats.remaining)} বাকি।
             </p>
           </div>
         </motion.div>
@@ -199,15 +184,9 @@ export function Dashboard() {
               const evItems = items.filter((i) => i.eventId === ev.id);
               const evSpent = evItems
                 .filter((i) => i.status === "Purchased")
-                .reduce(
-                  (s, i) => s + (i.actualPrice || 0) * (i.quantity || 1),
-                  0,
-                );
+                .reduce((s, i) => s + (i.actualPrice || 0) * (i.quantity || 1), 0);
               return (
-                <li
-                  key={ev.id}
-                  className="flex items-center justify-between text-sm"
-                >
+                <li key={ev.id} className="flex items-center justify-between text-sm">
                   <span className="bn">{ev.name}</span>
                   <span className="text-muted-foreground">
                     {evItems.length} আইটেম · {formatCurrency(evSpent)}
@@ -233,15 +212,9 @@ export function Dashboard() {
               const mItems = items.filter((i) => i.memberId === m.id);
               const mSpent = mItems
                 .filter((i) => i.status === "Purchased")
-                .reduce(
-                  (s, i) => s + (i.actualPrice || 0) * (i.quantity || 1),
-                  0,
-                );
+                .reduce((s, i) => s + (i.actualPrice || 0) * (i.quantity || 1), 0);
               return (
-                <li
-                  key={m.id}
-                  className="flex items-center justify-between text-sm"
-                >
+                <li key={m.id} className="flex items-center justify-between text-sm">
                   <span className="bn">{m.name}</span>
                   <span className="text-muted-foreground">
                     {mItems.length} আইটেম · {formatCurrency(mSpent)}

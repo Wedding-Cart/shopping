@@ -54,16 +54,12 @@ export function SettingsPage() {
     <div className="space-y-5">
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">সেটিংস</h1>
-        <p className="text-sm text-muted-foreground">
-          মূল বাজেট ও অ্যাডমিন পিন
-        </p>
+        <p className="text-sm text-muted-foreground">মূল বাজেট ও অ্যাডমিন পিন</p>
       </div>
 
       <div className="glass rounded-2xl p-5 shadow-soft">
         <h2 className="font-semibold">মূল বাজেট</h2>
-        <p className="text-sm text-muted-foreground">
-          ড্যাশবোর্ডে প্রদর্শিত মোট বিবাহ বাজেট।
-        </p>
+        <p className="text-sm text-muted-foreground">ড্যাশবোর্ডে প্রদর্শিত মোট বিবাহ বাজেট।</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
           <div className="flex-1">
             <Label htmlFor="b">মোট বাজেট (₹)</Label>

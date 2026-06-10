@@ -98,11 +98,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Wedding Planner" },
-      { name: "description", content: "A web app for wedding planning and budget management, offering a premium UI and offline capabilities." },
-      { property: "og:description", content: "A web app for wedding planning and budget management, offering a premium UI and offline capabilities." },
-      { name: "twitter:description", content: "A web app for wedding planning and budget management, offering a premium UI and offline capabilities." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9a9fe1d1-319f-4458-9281-a69ad0a6d41b/id-preview-f2b68387--cf3f42c5-7adc-4748-874a-2c472a3a1658.lovable.app-1780491656050.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9a9fe1d1-319f-4458-9281-a69ad0a6d41b/id-preview-f2b68387--cf3f42c5-7adc-4748-874a-2c472a3a1658.lovable.app-1780491656050.png" },
+      {
+        name: "description",
+        content:
+          "A web app for wedding planning and budget management, offering a premium UI and offline capabilities.",
+      },
+      {
+        property: "og:description",
+        content:
+          "A web app for wedding planning and budget management, offering a premium UI and offline capabilities.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "A web app for wedding planning and budget management, offering a premium UI and offline capabilities.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9a9fe1d1-319f-4458-9281-a69ad0a6d41b/id-preview-f2b68387--cf3f42c5-7adc-4748-874a-2c472a3a1658.lovable.app-1780491656050.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9a9fe1d1-319f-4458-9281-a69ad0a6d41b/id-preview-f2b68387--cf3f42c5-7adc-4748-874a-2c472a3a1658.lovable.app-1780491656050.png",
+      },
     ],
     links: [
       {

@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from "react";
 import { useSettings } from "./firestore";
 import { PinDialog } from "../components/pin-dialog";
 
@@ -49,12 +42,7 @@ export function PinProvider({ children }: { children: ReactNode }) {
   return (
     <PinCtx.Provider value={{ requirePin }}>
       {children}
-      <PinDialog
-        open={open}
-        purpose={purpose}
-        onSubmit={handleSubmit}
-        onCancel={handleCancel}
-      />
+      <PinDialog open={open} purpose={purpose} onSubmit={handleSubmit} onCancel={handleCancel} />
     </PinCtx.Provider>
   );
 }

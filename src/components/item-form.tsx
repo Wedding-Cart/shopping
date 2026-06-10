@@ -227,10 +227,7 @@ export function ItemForm({ open, onOpenChange, initial, quickMode }: Props) {
               </div>
               <div className="space-y-1.5">
                 <Label>অবস্থা</Label>
-                <Select
-                  value={status}
-                  onValueChange={(v) => setStatus(v as ItemStatus)}
-                >
+                <Select value={status} onValueChange={(v) => setStatus(v as ItemStatus)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>

@@ -1,11 +1,5 @@
 import { useMemo, useState } from "react";
-import {
-  useEvents,
-  useItems,
-  useMembers,
-  softDeleteItem,
-  useSettings,
-} from "@/lib/firestore";
+import { useEvents, useItems, useMembers, softDeleteItem, useSettings } from "@/lib/firestore";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,16 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import {
-  Search,
-  Plus,
-  Edit,
-  Trash2,
-  Package,
-  User,
-  CalendarHeart,
-  FileDown,
-} from "lucide-react";
+import { Search, Plus, Edit, Trash2, Package, User, CalendarHeart, FileDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -142,9 +127,7 @@ export function ItemsPage() {
               <DropdownMenuItem onClick={() => handleExport("all")}>
                 সম্পূর্ণ তালিকা
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport("Pending")}>
-                শুধু বাকি
-              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("Pending")}>শুধু বাকি</DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleExport("Purchased")}>
                 শুধু কেনা হয়েছে
               </DropdownMenuItem>
@@ -230,13 +213,10 @@ export function ItemsPage() {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <h3 className="bn truncate text-base font-semibold">
-                    {item.name}
-                  </h3>
+                  <h3 className="bn truncate text-base font-semibold">{item.name}</h3>
                   <p className="bn mt-0.5 text-xs text-muted-foreground">
                     <CalendarHeart className="mr-1 inline h-3 w-3" />
-                    {item.eventName} ·{" "}
-                    <User className="mr-1 inline h-3 w-3" />
+                    {item.eventName} · <User className="mr-1 inline h-3 w-3" />
                     {item.memberName}
                   </p>
                 </div>
@@ -259,32 +239,24 @@ export function ItemsPage() {
                 </div>
                 <div>
                   <p className="text-muted-foreground">প্রত্যাশিত</p>
-                  <p className="font-medium">
-                    {formatCurrency(item.expectedPrice)}
-                  </p>
+                  <p className="font-medium">{formatCurrency(item.expectedPrice)}</p>
                 </div>
                 <div>
                   <p className="text-muted-foreground">প্রকৃত</p>
                   <p className="font-medium">
-                    {item.actualPrice
-                      ? formatCurrency(item.actualPrice)
-                      : "—"}
+                    {item.actualPrice ? formatCurrency(item.actualPrice) : "—"}
                   </p>
                 </div>
               </div>
 
               {item.notes && (
-                <p className="bn mt-2 line-clamp-2 text-xs text-muted-foreground">
-                  {item.notes}
-                </p>
+                <p className="bn mt-2 line-clamp-2 text-xs text-muted-foreground">{item.notes}</p>
               )}
 
               <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-3 text-xs">
                 <span className="text-muted-foreground">
                   যোগ করেছেন{" "}
-                  <span className="font-medium text-foreground">
-                    {item.addedBy || "—"}
-                  </span>
+                  <span className="font-medium text-foreground">{item.addedBy || "—"}</span>
                 </span>
                 <div className="flex gap-1">
                   <Button
@@ -321,16 +293,13 @@ export function ItemsPage() {
         initial={editing}
       />
 
-      <AlertDialog
-        open={!!confirmDelete}
-        onOpenChange={(o) => !o && setConfirmDelete(null)}
-      >
+      <AlertDialog open={!!confirmDelete} onOpenChange={(o) => !o && setConfirmDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>রিসাইকেল বিনে সরাবেন?</AlertDialogTitle>
             <AlertDialogDescription>
-              <span className="bn">{confirmDelete?.name}</span> রিসাইকেল বিনে সরানো হবে।
-              পরে পুনরুদ্ধার করতে পারবেন।
+              <span className="bn">{confirmDelete?.name}</span> রিসাইকেল বিনে সরানো হবে। পরে
+              পুনরুদ্ধার করতে পারবেন।
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

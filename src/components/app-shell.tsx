@@ -28,13 +28,7 @@ import {
 } from "lucide-react";
 import { type ReactNode } from "react";
 import { QuickAddFab } from "./quick-add-fab";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 interface NavItem {
   to: string;
@@ -67,12 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4">
           <Sheet>
             <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                aria-label="মেনু খুলুন"
-              >
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="মেনু খুলুন">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
@@ -138,25 +127,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="ml-auto flex items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggle}
-              aria-label="থিম পরিবর্তন"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
+            <Button variant="ghost" size="icon" onClick={toggle} aria-label="থিম পরিবর্তন">
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="আরও মেনু"
-                >
+                <Button variant="ghost" size="icon" aria-label="আরও মেনু">
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -177,18 +153,14 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <span className="grid h-8 w-8 place-items-center rounded-full gradient-emerald text-xs font-semibold text-primary-foreground">
                     {(userName || user?.email || "U").slice(0, 1).toUpperCase()}
                   </span>
-                  <span className="hidden text-sm sm:inline">
-                    {userName || user?.email}
-                  </span>
+                  <span className="hidden text-sm sm:inline">{userName || user?.email}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
                   <div className="flex flex-col">
                     <span className="font-medium">{userName || "অতিথি"}</span>
-                    <span className="text-xs text-muted-foreground">
-                      {user?.email}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{user?.email}</span>
                     {isAdmin && (
                       <span className="mt-1 inline-flex w-fit items-center rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-medium text-gold">
                         অ্যাডমিন

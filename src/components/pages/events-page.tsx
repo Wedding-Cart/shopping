@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  useEvents,
-  useItems,
-  addEvent,
-  updateEvent,
-  deleteEvent,
-} from "@/lib/firestore";
+import { useEvents, useItems, addEvent, updateEvent, deleteEvent } from "@/lib/firestore";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -80,9 +74,7 @@ export function EventsPage() {
       <div className="flex items-end justify-between">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">অনুষ্ঠান</h1>
-          <p className="text-sm text-muted-foreground">
-            {events.length} অনুষ্ঠান
-          </p>
+          <p className="text-sm text-muted-foreground">{events.length} অনুষ্ঠান</p>
         </div>
         <Button onClick={openAdd}>
           <Plus className="mr-2 h-4 w-4" />
@@ -111,9 +103,7 @@ export function EventsPage() {
                   </div>
                   <div>
                     <p className="bn font-semibold">{e.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {count} আইটেম
-                    </p>
+                    <p className="text-xs text-muted-foreground">{count} আইটেম</p>
                   </div>
                 </div>
                 <div className="flex gap-1">
